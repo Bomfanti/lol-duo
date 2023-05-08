@@ -16,7 +16,7 @@ h2 {
 
 .primary-title {
     font-size: 90px;
-    color: rgb(255, 255, 255);
+    color: rgb(211, 26, 26);
 }
 
 .primary-button {
@@ -31,6 +31,10 @@ h2 {
 
 .primary-button:hover {
   background: linear-gradient(0deg, rgba(105,28,167,1) 40%, rgba(124,21,142,1) 100%);
+}
+.primary-title {
+    font-size: 90px;
+    color: rgb(255, 255, 255);
 }
 
 .secondary-button {
@@ -65,16 +69,18 @@ nav .nav-button {
     border-radius: 10px;
     border: none;
     margin: 10px;
+    background: linear-gradient(0deg, rgba(105,28,167,1) 40%, rgba(124,21,142,1) 100%);
+    color: rgb(218, 198, 205);
 }
 
 nav .nav-button:disabled {
-    background-color: rgb(181, 180, 180);
-    color: rgb(189, 42, 90);
+    background-color: rgb(22, 18, 18);
+    color: rgb(218, 198, 205);
 }
 
 nav .logo-container {
     width: 60px;
-    margin: 15px;
+    margin-left: 15px;
 }
 
 nav .logo-container .logo {
@@ -87,12 +93,127 @@ nav .logo-container .logo {
   height: 100vh;
   position: fixed;
   background: linear-gradient(
-          to bottom,
-          rgba(0, 0, 0, 0.65) 0%,
-          rgba(0, 0, 0, 0) 100%
-  )
+    to bottom,
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(0, 0, 0, 0) 100%
+), url('http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_2.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
+
 
 .home {
   margin-top: 30vh;
+}
+
+/*-------- Auth Modal --------*/
+.auth-modal {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 360px;
+  height: 600px;
+  background-color: #242424;
+  border-radius: 10px;
+  padding: 40px;
+}
+
+.auth-modal .close-icon {
+  display:flex;
+  justify-content: flex-end;
+  font-size: large;
+
+}
+
+.auth-modal form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-modal input[type=password],
+.auth-modal input[type=email] {
+  padding: 8px;
+  margin: 8px;
+  font-size: 17px;
+}
+
+
+/*-------- OnBoarding Page --------*/
+.onboarding {
+  border-top: solid 1px rgb(213, 213, 213);
+}
+
+.onboarding form {
+  display: flex;
+  justify-content: center;
+}
+
+.onboarding form section {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 35%;
+  text-align: start;
+}
+
+.onboarding form input {
+  padding: 15px 30px;
+  margin: 10px 0;
+  font-size: 15px;
+  border: solid 2px rgb(219, 219, 219);
+  border-radius: 10px;
+}
+
+.onboarding form label {
+  margin: 10px 0;
+}
+
+.onboarding form .multiple-input-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.onboarding form input::-webkit-outer-spin-button,
+.onboarding form input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.onboarding form .multiple-input-container input {
+  margin-right: 10px;
+}
+
+.onboarding form .multiple-input-container label {
+  padding: 10px;
+  border: solid 2px rgb(144, 144, 144);
+  border-radius: 10px;
+  transition: all 0.3s;
+  margin-right: 10px;
+}
+
+.onboarding form input[type=radio] {
+  display: none;
+}
+
+.onboarding form input[type=number] {
+  width: 10%;
+}
+
+.onboarding form input[type=radio]:checked + label {
+  border: solid 2px rgb(221, 39, 22);
+}
+
+.onboarding form input[type=submit]:hover {
+  background-color: rgb(235, 235, 235);
+}
+
+.onboarding form input[type=submit]:active {
+  background-color: rgb(226, 115, 115);
+}
+
+.onboarding form .photo-container img {
+  width: 100%
 }
