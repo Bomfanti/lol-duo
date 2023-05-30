@@ -59,7 +59,7 @@ const OnBoarding = () => {
               id="nickname"
               type="text"
               name="nickname"
-              placeholder="Seu Nome"
+              placeholder="Nick"
               required={true}
               value={formData.nickname}
               onChange={handleChange}
@@ -81,7 +81,7 @@ const OnBoarding = () => {
                 id="role-jg"
                 type="radio"
                 name="role"
-                value="jungle"
+                value="jg"
                 onChange={handleChange}
                 checked={formData.role === "jg"}
               />
@@ -138,7 +138,7 @@ const OnBoarding = () => {
                 onChange={handleChange}
                 checked={formData.role_interest === "jg"}
               />
-              <label htmlFor="mid-role-interest">Jungle</label>
+              <label htmlFor="jg-role-interest">Jungle</label>
               <input
                 id="mid-role-interest"
                 type="radio"
@@ -165,7 +165,7 @@ const OnBoarding = () => {
                 onChange={handleChange}
                 checked={formData.role_interest === "sup"}
               />
-              <label htmlFor="mid-role-interest">Suporte</label>
+              <label htmlFor="sup-role-interest">Suporte</label>
             </div>
 
             <label htmlFor="about">Sobre mim</label>
