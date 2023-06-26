@@ -3,7 +3,7 @@ import emblemBronze from "../assets/rankedEmblem/emblem-bronze.png";
 const Card = ({}) => {
   return (
     <>
-      <div className="hero">
+      <div>
         <img
           className="hero-profile-img"
           src="http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Qiyana_1.jpg"

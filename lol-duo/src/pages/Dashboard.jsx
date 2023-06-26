@@ -1,52 +1,98 @@
-import React, { useState } from "react";
-import Card from "../components/card";
+import React, { useState, useEffect } from "react";
+import TinderCard from "react-tinder-card";
+import ChatContainer from "../components/ChatContainer";
+import { useCookies } from "react-cookie";
+import axios from "axios";
 
 const Dashboard = () => {
-  const characters = [
-    {
-      user_id: "1",
-      name: "fizz",
-      title: "titulo 1",
-      url: "",
-    },
-    {
-      user_id: "2",
-      name: "fizz",
-      title: "titulo 2",
-      url: "",
-    },
-    {
-      user_id: "3",
-      name: "fizz",
-      title: "titulo 3",
-      url: "",
-    },
-  ];
+  const [user, setUser] = useState(null);
+  const [roleUsers, setroleUsers] = useState(null);
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  const [lastDirection, setLastDirection] = useState();
 
-  const [currentCardIndex, setCurrentCardIndex] = useState(0);
-  const currentCard = characters[currentCardIndex];
+  const userId = cookies.UserId;
 
-  const handleLike = () => {
-    setCurrentCardIndex(currentCardIndex + 1);
+  const getUser = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/user", {
+        params: { userId },
+      });
+      setUser(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const handleUnlike = () => {
-    setCurrentCardIndex(currentCardIndex + 1);
+  const getroleUsers = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/role-users", {
+        params: { role: user?.role_interest },
+      });
+      setroleUsers(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      getroleUsers();
+    }
+  }, [user]);
+
+  const updateMatches = async (matchedUserId) => {
+    try {
+      await axios.put("http://localhost:8000/addmatch", {
+        userId,
+        matchedUserId,
+      });
+      getUser();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const swiped = (direction, swipedUserId) => {
+    if (direction === "right") {
+      updateMatches(swipedUserId);
+    }
+    setLastDirection(direction);
+  };
+
   return (
     <>
-      <div className="dashboard">
-        <div className="swiper-container">
-          <div className="card-container">
-            <Card />
-            <div>
-              <h2>{currentCard.title}</h2>
+      {user && (
+        <div className="dashboard">
+          <ChatContainer user={user} />
+          <div className="swipe-container">
+            <div className="card-container">
+              {roleUsers?.map((player) => (
+                <>
+                  <TinderCard
+                    className="swipe"
+                    key={player.user_id}
+                    onSwipe={(dir) => swiped(dir, player.user_id)}
+                  >
+                    <div
+                      style={{ backgroundImage: "url(" + player.url + ")" }}
+                      className="card"
+                    >
+                      <div>{player.first_name}</div>
+                    </div>
+                  </TinderCard>
+                </>
+              ))}
+              <div className="swipe-info">
+                {lastDirection ? <p>You Swiped {lastDirection}</p> : <p></p>}
+              </div>
             </div>
-            <button onClick={handleLike}>Like</button>
-            <button onClick={handleUnlike}>Unlike</button>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };
